@@ -1,0 +1,24 @@
+<mat-progress-spinner class="example-margin" *ngIf="isLoading"
+                      [color]="color"
+                      [mode]="mode"
+                      [value]="value"></mat-progress-spinner>
+<mat-accordion multi="true" *ngIf="posts?.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header>
+      <p>{{post.title}}</p>
+    </mat-expansion-panel-header>
+    <div class="post-image">
+      <img [src]="post.imagePath" [alt]="post.title">
+    </div>
+    <p>{{post.content}}</p>
+    <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
+      <button mat-button color="primary" [routerLink]="['/edit', post.id]"  [queryParams]="{postId: post.id}">EDIT</button>
+      <button mat-button color="warn" *ngIf="userId == post.creator" (click)="onDelete(post.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalItems" *ngIf="posts?.length > 0 && !isLoading"
+               [pageSize]="size"
+               [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)">
+</mat-paginator>
+<p *ngIf="posts?.length === 0 && !isLoading" class="info-text mat-body-1">No Posts</p>
