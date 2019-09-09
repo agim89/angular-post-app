@@ -9,7 +9,7 @@ import {AuthService} from './auth/auth.service';
 })
 export class AppComponent implements  OnInit {
   title = 'mean-app';
-  constructorgregrege (private authService: AuthService) {
+  constructor(private authService: AuthService) {
 
   }
   ngOnInit() {

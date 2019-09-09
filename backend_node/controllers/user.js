@@ -17,7 +17,7 @@ let users = {
     })
   },
 
-  login: (req, res, next) => {scasccascascasccsacascsac
+  login: (req, res, next) => {
     let fetchedUser;
     User.findOne({email: req.body.email}).then(user => {
       if (!user) {
