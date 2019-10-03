@@ -24,11 +24,14 @@ app.use((req, res, next) => {
 // app.use('/api/posts', postRoutes)      ili nekoj drug file to access
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use("/images", express.static(path.join("backend_node/images")));
+app.use("/images", express.static(path.join(__dirname, "backend_node/images")));
+app.use("/", express.static(path.join(__dirname, "angular")));
 app.use(postRoutes);
 app.use(userRoutes);
 var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'angular', 'index.html'))
+})
 
 
 
