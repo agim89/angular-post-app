@@ -27,6 +27,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use("/images", express.static(path.join("backend_node/images")));
 app.use(postRoutes);
 app.use(userRoutes);
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
 
 
 
